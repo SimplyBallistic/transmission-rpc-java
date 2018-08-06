@@ -5,12 +5,8 @@ import java.lang.reflect.ParameterizedType;
 public abstract class RpcCommand<T, V> {
 
     private final Class targetArgclass;
-    private T requestArguments;
-
-    public abstract String getMethod();
-
     private final Long tag;
-
+    private T requestArguments;
     private RpcRequest<T> request;
     private RpcResponse<V> response;
 
@@ -27,6 +23,8 @@ public abstract class RpcCommand<T, V> {
         request = new RpcRequest<T>();
     }
 
+    public abstract String getMethod();
+
     public RpcRequest<T> buildRequestPayload() {
         request.setTag(tag);
         request.setMethod(getMethod());
@@ -42,12 +40,12 @@ public abstract class RpcCommand<T, V> {
         return tag;
     }
 
-    public void setResponse(RpcResponse<V> response) {
-        this.response = response;
-    }
-
     public RpcResponse<V> getResponse() {
         return response;
+    }
+
+    public void setResponse(RpcResponse<V> response) {
+        this.response = response;
     }
 
     public Class getArgumentsObject() {

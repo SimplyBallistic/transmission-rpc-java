@@ -1,7 +1,6 @@
 package nl.stil4m.transmission.api.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.stil4m.transmission.api.domain.ids.Ids;
 
 import java.util.List;

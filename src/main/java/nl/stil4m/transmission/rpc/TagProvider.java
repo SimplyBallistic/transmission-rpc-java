@@ -7,6 +7,7 @@ public class TagProvider {
     public TagProvider() {
         tag = 0L;
     }
+
     public Long nextTag() {
         return ++tag;
     }

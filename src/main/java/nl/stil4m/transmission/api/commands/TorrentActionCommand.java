@@ -10,6 +10,7 @@ import java.util.Map;
 public class TorrentActionCommand extends RpcCommand<Ids, Object> {
 
     private final Map<TorrentAction, String> torrentActionMap = new HashMap<>();
+    private final String method;
 
     {
         torrentActionMap.put(TorrentAction.START, "torrent-start");
@@ -18,8 +19,6 @@ public class TorrentActionCommand extends RpcCommand<Ids, Object> {
         torrentActionMap.put(TorrentAction.VERIFY, "torrent-verify");
         torrentActionMap.put(TorrentAction.REANNOUNCE, "torrent-reannounce");
     }
-
-    private final String method;
 
     public TorrentActionCommand(Long tag, TorrentAction action) {
         super(tag);

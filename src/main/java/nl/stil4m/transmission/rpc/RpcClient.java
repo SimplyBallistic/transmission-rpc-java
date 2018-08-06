@@ -1,11 +1,9 @@
 package nl.stil4m.transmission.rpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import nl.stil4m.transmission.http.InvalidResponseStatus;
 import nl.stil4m.transmission.http.RequestExecutor;
 import nl.stil4m.transmission.http.RequestExecutorException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -53,8 +51,9 @@ public class RpcClient {
     }
 
     private <T, V> void executeCommandInner(RpcCommand<T, V> command, Map<String, String> h) throws RequestExecutorException, InvalidResponseStatus, IOException, RpcException {
+        requestExecutor.removeAllHeaders();
         for (Map.Entry<String, String> entry : h.entrySet()) {
-            requestExecutor.removeAllHeaders();
+
             requestExecutor.configureHeader(entry.getKey(), entry.getValue());
         }
 
@@ -77,7 +76,16 @@ public class RpcClient {
     private void setup() throws RpcException {
         try {
             HttpPost httpPost = createPost();
+            if (configuration.hasAuthInfo()) {
+                String auth = "Basic " + configuration.getEncodedAuthInfo();
+                httpPost.addHeader("Authorization", auth);
+                headers.put("Authorization", auth);
+            }
             HttpResponse result = defaultHttpClient.execute(httpPost);
+            if (result.getStatusLine().getStatusCode() == 401) {
+                throw new IOException("Connection needs authentication");
+
+            }
             putSessionHeader(result);
             EntityUtils.consume(result.getEntity());
         } catch (IOException e) {

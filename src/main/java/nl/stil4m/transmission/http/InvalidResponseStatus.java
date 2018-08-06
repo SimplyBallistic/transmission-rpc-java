@@ -11,4 +11,9 @@ public class InvalidResponseStatus extends Throwable {
     public int getStatusCode() {
         return statusCode;
     }
+
+    @Override
+    public String getMessage() {
+        return String.valueOf(statusCode);
+    }
 }

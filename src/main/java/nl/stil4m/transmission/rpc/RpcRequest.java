@@ -8,27 +8,27 @@ public class RpcRequest<T extends Object> {
 
     private Long tag;
 
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public void setArguments(T arguments) {
-        this.arguments = arguments;
-    }
-
-    public void setTag(Long tag) {
-        this.tag = tag;
-    }
-
     public String getMethod() {
         return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public T getArguments() {
         return arguments;
     }
 
+    public void setArguments(T arguments) {
+        this.arguments = arguments;
+    }
+
     public Long getTag() {
         return tag;
+    }
+
+    public void setTag(Long tag) {
+        this.tag = tag;
     }
 }

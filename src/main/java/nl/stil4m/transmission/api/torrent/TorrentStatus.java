@@ -10,7 +10,7 @@ public enum TorrentStatus {
     DOWNLOAD_WAIT(3L), // Queued to download
     DOWNLOADING(4L), // Downloading
     SEED_WAIT(5L), // Queued to seed
-    SEED (6L), // Seeding
+    SEED(6L), // Seeding
     ISOLATED(7L); // Torrent can't find peers
 
     private Long longValue;
